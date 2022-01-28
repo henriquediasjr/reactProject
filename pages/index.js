@@ -187,6 +187,16 @@ export default function PaginaInicial() {
               {/* {gitData.location}
               {gitData.bio} */}
             </Text>
+            <Image
+              styleSheet={{
+                borderRadius: '0%',
+                marginBottom: '16px',
+              }}
+              src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&hide_rank&theme=dark`}
+
+            >
+
+            </Image>
           </Box>
           {/* Photo Area */}
         </Box>
