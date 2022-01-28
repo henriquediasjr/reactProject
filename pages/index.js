@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 function Titulo(props) {
 
   const Tag = props.tag;
-
+  // console.log(props)
   return (
     <>
       <Tag>{props.children}</Tag>
@@ -40,6 +40,19 @@ export default function PaginaInicial() {
   // const username = 'nei';
   const [username, setUsername] = useState('henriquediasjr');
   const roteamento = useRouter();
+  const [gitData, setGitData] = useState()
+
+  fetch(`https://api.github.com/users/${username}`).then(res => {
+    if (res.ok) {
+      res.json().then(data => {
+        setGitData(data)
+      })
+    } else {
+      console.log('erro')
+    }
+  }).catch((err) => console.error(err))
+
+
 
   return (
     <>
@@ -117,6 +130,7 @@ export default function PaginaInicial() {
               type='submit'
               label='Entrar'
               fullWidth
+              disabled={username.length <= 2}
               buttonColors={{
                 contrastColor: appConfig.theme.colors.neutrals["000"],
                 mainColor: appConfig.theme.colors.primary[500],
@@ -160,19 +174,18 @@ export default function PaginaInicial() {
                 padding: '3px 10px',
                 borderRadius: '1000px'
               }}
-
             >
               {username}
             </Text>
             <Text
-              variant="body4"
               styleSheet={{
                 color: appConfig.theme.colors.neutrals[200],
                 backgroundColor: appConfig.theme.colors.neutrals[900],
                 padding: '3px 10px',
                 borderRadius: '1000px'
-              }}
-            >
+              }}>
+              {/* {gitData.location}
+              {gitData.bio} */}
             </Text>
           </Box>
           {/* Photo Area */}
