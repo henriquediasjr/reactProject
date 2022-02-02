@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 function Titulo(props) {
-
   const Tag = props.tag;
   // console.log(props)
   return (
@@ -20,6 +19,23 @@ function Titulo(props) {
     </>
   )
 }
+
+// function GitData(data) {
+//   if (data) {
+//     console.log(data)
+//     showGitData(data)
+//   } else {
+//     console.log('funcao nao deu certo')
+//   }
+// }
+
+// function showGitData(data) {
+//   if (data) {
+//     console.log(data.location)
+//   } else {
+//     console.log('não funcionou')
+//   }
+// }
 
 // Componente React
 // function HomePage() {
@@ -40,7 +56,7 @@ export default function PaginaInicial() {
   // const username = 'nei';
   const [username, setUsername] = useState('henriquediasjr');
   const roteamento = useRouter();
-  const [gitData, setGitData] = useState()
+  const [gitData, setGitData] = useState(`https://github.com/${username}.png`)
 
   fetch(`https://api.github.com/users/${username}`).then(res => {
     if (res.ok) {
@@ -50,9 +66,7 @@ export default function PaginaInicial() {
     } else {
       console.log('erro')
     }
-  }).catch((err) => console.error(err))
-
-
+  }).catch((err) => console.error(err, "está dando erro!"))
 
   return (
     <>
@@ -177,26 +191,22 @@ export default function PaginaInicial() {
             >
               {username}
             </Text>
-            <Text
+            {/* <Text
               styleSheet={{
                 color: appConfig.theme.colors.neutrals[200],
                 backgroundColor: appConfig.theme.colors.neutrals[900],
                 padding: '3px 10px',
                 borderRadius: '1000px'
               }}>
-              {/* {gitData.location}
-              {gitData.bio} */}
-            </Text>
+              {GitData(gitData)}
+            </Text> */}
             <Image
               styleSheet={{
                 borderRadius: '0%',
                 marginBottom: '16px',
               }}
               src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&hide_rank&theme=dark`}
-
-            >
-
-            </Image>
+            />
           </Box>
           {/* Photo Area */}
         </Box>
